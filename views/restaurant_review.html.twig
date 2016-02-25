@@ -1,0 +1,41 @@
+<html>
+<head>
+    <title>Restaurant Review</title>
+</head>
+<body>
+    <h1>Leave a Review for {{ restaurant.getRestName }}</h1>
+
+    <form action="/restaurants/{{ restaurant.getId }}/review" method="post">
+      <label for="reviewer_name">Enter your name:</label>
+      <input id="reviewer_name" name="reviewer_name" type="text">
+
+      <label for="review_score">Restaurant Rating:</label>
+      <select name="review_score">
+          <option value="1">1 (BAD)</option>
+          <option value="2">2 (MEDIOCRE)</option>
+          <option value="3">3 (ACCEPTABLE)</option>
+          <option value="4">4 (PRETTY GOOD)</option>
+          <option value="5">5 (PHENOMENAL)</option>
+      </select>
+
+      <label for="review_content">Tell us about your experience:</label>
+      <input id="review_content" name="review_content" type="text">
+
+      <button type="submit">Submit</button>
+    </form>
+
+    {% if reviews is not empty %}
+        <p>Here are the reviews:</p>
+        <ul>
+            {% for review in reviews %}
+                <li>
+                    <h3>Reviewer: {{ review.getReviewerName }}</h3>
+                    <h4>Rating: {{ review.getReviewScore }}/5</h4>
+                    <h4>Review: {{ review.getReviewContent }}</h4>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <p><a href='/'>Home</a></p>
+</body>
+</html>

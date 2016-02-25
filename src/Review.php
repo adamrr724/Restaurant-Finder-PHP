@@ -78,11 +78,11 @@
         static function deleteAll(){
             $GLOBALS['DB']->exec("DELETE FROM review");
         }
-        //
-        // function deleteOneReview()
-        // {
-        //     $GLOBALS['DB']->exec("DELETE FROM review WHERE id = {$this->getId()};");
-        // }
+
+        function deleteOneReview()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM review WHERE id = {$this->getId()};");
+        }
     }
 
 ?>

@@ -120,9 +120,6 @@
             $this->assertEquals($test_review2, $result);
 
         }
-
-
-
     }
 
 ?>

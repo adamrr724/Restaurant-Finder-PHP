@@ -66,7 +66,6 @@
             'cuisine' => $cuisine,
             'restaurants' => $cuisine->getRestaurants()
         ));
-
     });
 
     $app->get("/restaurants/{id}/edit", function($id) use ($app) {
@@ -101,6 +100,23 @@
         return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' => $cuisine->getRestaurants()));
     });
 
+    $app->get("/restaurants/{id}/review", function($id) use ($app) {
+        $restaurant = Restaurant::find($id);
+        return $app['twig']->render('restaurant_review.html.twig', array('restaurant' => $restaurant));
+    });
+
+    $app->post("/restaurants/{id}/review", function($id) use ($app) {
+        $reviewer_name = $_POST['reviewer_name'];
+        $review_score = $_POST['review_score'];
+        $review_content = $_POST['review_content'];
+        $restaurant = Restaurant::find($id);
+        $restaurant_id = $restaurant->getId();
+        $new_review = new Review ($reviewer_name, $review_score, $review_content, $restaurant_id, $id = null);
+        $new_review->save();
+
+        return $app['twig']->render('restaurant_review.html.twig', array('restaurant' => $restaurant, 'reviews' => $restaurant->getReviews()));
+    });
+
     $app->delete("/cuisines/{id}", function($id) use ($app) {
         $cuisine = Cuisine::find($id);
         $cuisine->delete();
@@ -114,8 +130,6 @@
         $restaurant->deleteOneRestaurant();
         return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' => $cuisine->getRestaurants()));
     });
-
-
 
     return $app;
  ?>

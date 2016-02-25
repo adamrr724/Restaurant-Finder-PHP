@@ -20,11 +20,12 @@
                     <form action="/restaurants/{{ restaurant.getId }}/edit" method="get">
                         <button type="submit" name="button">Edit restaurant</button>
                     </form>
+                    <form action="/restaurants/{{ restaurant.getId }}/review" method="get">
+                        <button type="submit" name="button">Leave a Review</button>
+                    </form>
                 </li>
             {% endfor %}
         </ul>
-    {% else %}
-    <h5>HI</h5>
     {% endif %}
 
     <h4>Add a restaurant</h4>
