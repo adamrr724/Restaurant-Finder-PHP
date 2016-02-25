@@ -1,51 +1,73 @@
 <html>
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+     <link rel="stylesheet" href="/css/styles.css" type="text/css">
+     <script>
+      $(document).ready(function() {
+         $('select').material_select();
+     });
+   </script>
     <title>Best Restaurant | Cuisines</title>
 </head>
 <body>
-    <h1>{{ cuisine.getName }}</h1>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="/" class="brand-logo">Portland Restaurants</a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="cuisineheader">
+            <h1>{{ cuisine.getName }} Restaurants</h1>
+        </div>
 
-    <p><a href="/cuisines/{{ cuisine.getId }}/edit">Edit this cuisine</a></p>
+        <p><a href="/cuisines/{{ cuisine.getId }}/edit">Edit this cuisine</a></p>
 
-    <p><a href='/'>Home</a></p>
+        {% if restaurants is not empty %}
+            <ul>
+                {% for restaurant in restaurants %}
+                    <li>
+                        <h3>{{ restaurant.getRestName }}</h3>
+                        <h4>{{ restaurant.getLocation }}</h4>
+                        <h4>{{ restaurant.getPriceRange }}</h4>
+                        <form action="/restaurants/{{ restaurant.getId }}/edit" method="get">
+                            <button class="btn waves-effect blue darken-1 waves-light" type="submit" name="button">Edit restaurant</button>
+                        </form>
+                        <form action="/restaurants/{{ restaurant.getId }}/review" method="get">
+                            <button class="btn waves-effect blue darken-1 waves-light" type="submit" name="button">Leave a Review</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+<br>
+        <h4>Add a restaurant</h4>
 
-    {% if restaurants is not empty %}
-        <p>Here are the restaurants:</p>
-        <ul>
-            {% for restaurant in restaurants %}
-                <li>
-                    <h3>{{ restaurant.getRestName }}</h3>
-                    <h4>{{ restaurant.getLocation }}</h4>
-                    <h4>{{ restaurant.getPriceRange }}</h4>
-                    <form action="/restaurants/{{ restaurant.getId }}/edit" method="get">
-                        <button type="submit" name="button">Edit restaurant</button>
-                    </form>
-                    <form action="/restaurants/{{ restaurant.getId }}/review" method="get">
-                        <button type="submit" name="button">Leave a Review</button>
-                    </form>
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+        <form action='/restaurants' method='post'>
+            <input id="cuisine_id" name="cuisine_id" type="hidden" value="{{ cuisine.getId() }}">
+            <div class="input-field">
+                <label for='rest_name'>Restaurant Name</label>
+                <input id='rest_name' name='rest_name' type='text' required>
+            </div>
+            <div class="input-field">
+                <label for='location'>Location:</label>
+                <input id='location' name='location' type='text' required>
+            </div>
+            <div class="input-field col s6">
+                <select name="price_range">
+                    <option value="" disabled selected>Price Range</option>
+                    <option value="Cheap">Cheap</option>
+                    <option value="Average">Average</option>
+                    <option value="Expensive">Expensive</option>
+                </select>
+                <label for='price_range'></label>
+            </div>
+            <button class="btn waves-effect blue darken-1 waves-light" type="submit" name="button">Add restaurant</button>
 
-    <h4>Add a restaurant</h4>
+        </form>
 
-    <form action='/restaurants' method='post'>
-        <input id="cuisine_id" name="cuisine_id" type="hidden" value="{{ cuisine.getId() }}">
-        <label for='rest_name'>Restaurant Name</label>
-        <input id='rest_name' name='rest_name' type='text'>
-        <label for='location'>Location:</label>
-        <input id='location' name='location' type='text'>
-        <label for='price_range'>Price Range</label>
-        <select name="price_range">
-            <option value="Cheap">Cheap</option>
-            <option value="Average">Average</option>
-            <option value="Expensive">Expensive</option>
-        </select>
-
-        <button type='submit'>Add restaurant</button>
-    </form>
-
-    <p><a href='/'>Home</a></p>
+        <p><a href='/'>Home</a></p>
+    </div>
 </body>
 </html>

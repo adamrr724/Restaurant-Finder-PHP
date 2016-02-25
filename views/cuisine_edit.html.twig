@@ -1,26 +1,38 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+         <link rel="stylesheet" href="/css/styles.css" type="text/css">
+
         <meta charset="utf-8">
         <title>Edit Cuisine</title>
     </head>
     <body>
-        <h1>Update the {{ cuisine.getName }} cuisine </h1>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="/" class="brand-logo">Portland Restaurants</a>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="cuisineheader">
+                <h1>Update the {{ cuisine.getName }} cuisine </h1>
+            </div>
+            <form action="/cuisines/{{ cuisine.getId }}" method="post">
+              <input name="_method" type="hidden" value="patch" >
+            <div class="input-field">
+              <label for="name">Rename your cuisine</label>
+              <input id="name" name="name" type="text" required>
+            </div>
+              <button class="btn waves-effect blue darken-1 waves-light" type="submit">Update</button>
+            </form>
+            <br>
+            <form action="/cuisines/{{ cuisine.getId }}" method="post">
+              <input name="_method" type="hidden" value="delete">
 
-<form action="/cuisines/{{ cuisine.getId }}" method="post">
-  <input name="_method" type="hidden" value="patch">
-
-  <label for="name">Rename your cuisine</label>
-  <input id="name" name="name" type="text">
-
-  <button type="submit">Update</button>
-</form>
-
-<form action="/cuisines/{{ cuisine.getId }}" method="post">
-  <input name="_method" type="hidden" value="delete">
-
-  <button type="submit">Delete this cuisine</button>
-</form>
-
+              <button class="btn waves-effect blue darken-1 waves-light" type="submit">Delete this cuisine</button>
+            </form>
+        </div>
     </body>
 </html>

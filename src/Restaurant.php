@@ -133,11 +133,13 @@
 
         static function deleteAll(){
             $GLOBALS['DB']->exec("DELETE FROM restaurant");
+            $GLOBALS['DB']->exec("DELETE FROM review WHERE restaurant_id = {$this->getId()};");
         }
 
         function deleteOneRestaurant()
         {
             $GLOBALS['DB']->exec("DELETE FROM restaurant WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM review WHERE restaurant_id = {$this->getId()};");
         }
     }
 

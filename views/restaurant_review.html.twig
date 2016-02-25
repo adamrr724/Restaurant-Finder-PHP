@@ -1,41 +1,65 @@
 <html>
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <script>
+     $(document).ready(function() {
+        $('select').material_select();
+    });
+  </script>
     <title>Restaurant Review</title>
 </head>
 <body>
-    <h1>Leave a Review for {{ restaurant.getRestName }}</h1>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="/" class="brand-logo">Portland Restaurants</a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="cuisineheader">
+            <h1>Leave a Review for {{ restaurant.getRestName }}</h1>
+        </div>
 
-    <form action="/restaurants/{{ restaurant.getId }}/review" method="post">
-      <label for="reviewer_name">Enter your name:</label>
-      <input id="reviewer_name" name="reviewer_name" type="text">
+        <form action="/restaurants/{{ restaurant.getId }}/review" method="post">
+            <div class="input-field">
+              <label for="reviewer_name">Enter your name:</label>
+              <input id="reviewer_name" name="reviewer_name" type="text" required>
+            </div>
+            <div class="input-field">
+              <label for="review_score"></label>
+              <select name="review_score">
+                  <option value="3"  selected>Restaurant Rating</option>=
+                  <option value="1">1 (BAD)</option>
+                  <option value="2">2 (MEDIOCRE)</option>
+                  <option value="3">3 (ACCEPTABLE)</option>
+                  <option value="4">4 (PRETTY GOOD)</option>
+                  <option value="5">5 (PHENOMENAL)</option>
+              </select>
+            </div>
+            <div class="input-field">
+              <label for="review_content">Tell us about your experience:</label>
+              <input id="review_content" name="review_content" type="text" required>
+            </div>
+          <button class="btn waves-effect blue darken-1 waves-light" type="submit" name="button">Submit</button>
+        </form>
 
-      <label for="review_score">Restaurant Rating:</label>
-      <select name="review_score">
-          <option value="1">1 (BAD)</option>
-          <option value="2">2 (MEDIOCRE)</option>
-          <option value="3">3 (ACCEPTABLE)</option>
-          <option value="4">4 (PRETTY GOOD)</option>
-          <option value="5">5 (PHENOMENAL)</option>
-      </select>
+        {% if reviews is not empty %}
+            <p>Here are the reviews:</p>
+            <ul>
+                {% for review in reviews %}
+                    <li>
+                        <h3>Reviewer: {{ review.getReviewerName }}</h3>
+                        <h4>Rating: {{ review.getReviewScore }}/5</h4>
+                        <h4>Review: {{ review.getReviewContent }}</h4>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
 
-      <label for="review_content">Tell us about your experience:</label>
-      <input id="review_content" name="review_content" type="text">
 
-      <button type="submit">Submit</button>
-    </form>
-
-    {% if reviews is not empty %}
-        <p>Here are the reviews:</p>
-        <ul>
-            {% for review in reviews %}
-                <li>
-                    <h3>Reviewer: {{ review.getReviewerName }}</h3>
-                    <h4>Rating: {{ review.getReviewScore }}/5</h4>
-                    <h4>Review: {{ review.getReviewContent }}</h4>
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-    <p><a href='/'>Home</a></p>
+        <p><a class="btn waves-effect blue darken-1 waves-light" href='/'>Home</a></p>
+    </div>
 </body>
 </html>
