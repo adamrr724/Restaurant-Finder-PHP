@@ -16,50 +16,29 @@
             $this->id = $id;
         }
 
-        // function setRestName($new_reviewer_name)
-        // {
-        //     $this->reviewer_name = $new_reviewer_name;
-        // }
-        //
-        // function setLocation($new_review_score)
-        // {
-        //     $this->review_score = $new_review_score;
-        // }
-        //
-        // function setPriceRange($new_review_content)
-        // {
-        //     $this->review_content = $new_review_content;
-        // }
-        //
-        // //is this doing what we want it to do?
-        // function setCuisineId($new_restaurant_id)
-        // {
-        //     $this->restaurant_id = $new_restaurant_id;
-        // }
-        //
-        // function getRestName()
-        // {
-        //     return $this->reviewer_name;
-        // }
-        //
-        // function getLocation()
-        // {
-        //     return $this->review_score;
-        // }
-        //
-        // function getPriceRange() {
-        //     return $this->review_content;
-        // }
-        //
-        // function getId() {
-        //     return $this->id;
-        // }
-        //
-        // function getCuisineId() {
-        //     return $this->restaurant_id;
-        // }
-        //
-        //
+        function getReviewerName()
+        {
+            return $this->reviewer_name;
+        }
+
+        function getReviewScore()
+        {
+            return $this->review_score;
+        }
+
+        function getReviewContent() {
+            return $this->review_content;
+        }
+
+        function getId() {
+            return $this->id;
+        }
+
+        function getRestaurantId() {
+            return $this->restaurant_id;
+        }
+
+
         // function save() //saves to database CHOMP
         // {
         //     $GLOBALS['DB']->exec("INSERT INTO restaurant (reviewer_name, review_score, review_content, restaurant_id) VALUES ('{$this->getRestName()}', '{$this->getLocation()}', '{$this->getPriceRange()}', {$this->getCuisineId()});");
