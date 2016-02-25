@@ -102,7 +102,7 @@
 
     $app->get("/restaurants/{id}/review", function($id) use ($app) {
         $restaurant = Restaurant::find($id);
-        return $app['twig']->render('restaurant_review.html.twig', array('restaurant' => $restaurant));
+        return $app['twig']->render('restaurant_review.html.twig', array('restaurant' => $restaurant, 'reviews' => $restaurant->getReviews()));
     });
 
     $app->post("/restaurants/{id}/review", function($id) use ($app) {
