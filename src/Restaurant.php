@@ -83,6 +83,13 @@
             return $restaurants;
         }
 
+        function updateRestName($new_rest_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE restaurants SET rest_name = '{$new_rest_name}' WHERE id = {$this->getId()};");
+            $this->setRestName($new_rest_name);
+        }
+
+
         static function find($search_id)
         {
             $found_restaurant = null;

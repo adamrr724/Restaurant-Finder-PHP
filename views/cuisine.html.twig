@@ -13,7 +13,14 @@
         <p>Here are the restaurants:</p>
         <ul>
             {% for restaurant in restaurants %}
-                <li>{{ restaurant.getRestName }}</li>
+                <li>
+                    <h3>{{ restaurant.getRestName }}</h3>
+                    <h4>{{ restaurant.getLocation }}</h4>
+                    <h4>{{ restaurant.getPriceRange }}</h4>
+                    <form action="/restaurants/{{ restaurant.getId }}/edit" method="get">
+                        <button type="submit" name="button">Edit restaurant</button>
+                    </form>
+                </li>
             {% endfor %}
         </ul>
     {% else %}
@@ -29,7 +36,11 @@
         <label for='location'>Location:</label>
         <input id='location' name='location' type='text'>
         <label for='price_range'>Price Range</label>
-        <input id='price_range' name='price_range' type='text'>
+        <select name="price_range">
+            <option value="Cheap">Cheap</option>
+            <option value="Average">Average</option>
+            <option value="Expensive">Expensive</option>
+        </select>
 
         <button type='submit'>Add restaurant</button>
     </form>
