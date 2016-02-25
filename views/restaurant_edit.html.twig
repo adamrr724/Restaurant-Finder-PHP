@@ -1,0 +1,44 @@
+<html>
+<head>
+    <title>Restaurant List</title>
+</head>
+<body>
+    <h1>Update {{ restaurant.getRestName }} Information</h1>
+
+    <form action="/restaurants/{{ restaurant.getId }}/rest_name" method="post">
+      <input name="_method" type="hidden" value="patch">
+
+      <label for="rest_name">Rename your restaurant:</label>
+      <input id="rest_name" name="rest_name" type="text">
+
+      <button type="submit">Update</button>
+    </form>
+
+    <form action="/restaurants/{{ restaurant.getId }}/location" method="post">
+      <input name="_method" type="hidden" value="patch">
+
+      <label for="location">New Location:</label>
+      <input id="location" name="location" type="text">
+
+      <button type="submit">Update</button>
+    </form>
+
+    <form action="/restaurants/{{ restaurant.getId }}/price_range" method="post">
+      <input name="_method" type="hidden" value="patch">
+
+      <label for="price_range">New Price Range:</label>
+          <select name="price_range">
+              <option value="Cheap">Cheap</option>
+              <option value="Average">Average</option>
+              <option value="Expensive">Expensive</option>
+          </select>
+
+      <button type="submit">Update</button>
+    </form>
+    <form action="/restaurants/{{ restaurant.getId }}/delete" method="post">
+        <input name="_method" type="hidden" value="delete">
+        <button type="submit" name="button">Delete restaurant</button>
+    </form>
+    <p><a href='/'>Home</a></p>
+</body>
+</html>

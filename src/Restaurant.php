@@ -85,10 +85,21 @@
 
         function updateRestName($new_rest_name)
         {
-            $GLOBALS['DB']->exec("UPDATE restaurants SET rest_name = '{$new_rest_name}' WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("UPDATE restaurant SET rest_name = '{$new_rest_name}' WHERE id = {$this->getId()};");
             $this->setRestName($new_rest_name);
         }
 
+        function updatePriceRange($new_price_range)
+        {
+            $GLOBALS['DB']->exec("UPDATE restaurant SET price_range = '{$new_price_range}' WHERE id = {$this->getId()};");
+            $this->setPriceRange($new_price_range);
+        }
+
+        function updateLocation($new_location)
+        {
+            $GLOBALS['DB']->exec("UPDATE restaurant SET location = '{$new_location}' WHERE id = {$this->getId()};");
+            $this->setLocation($new_location);
+        }
 
         static function find($search_id)
         {
@@ -105,6 +116,11 @@
 
         static function deleteAll(){
             $GLOBALS['DB']->exec("DELETE FROM restaurant");
+        }
+
+        function deleteOneRestaurant()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM restaurant WHERE id = {$this->getId()};");
         }
     }
 
